@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 990c4d70d9d87864e97cad17a5a0f83e
+timeCreated: 1543399659
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Blackjack
+  fontNames:
+  - Blackjack
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
