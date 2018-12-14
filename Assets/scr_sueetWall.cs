@@ -160,7 +160,7 @@ public class scr_sueetWall : MonoBehaviour {
 
 			for (int i = 0; i < presses.Length; i++) {
 				if (Regex.IsMatch (presses [i], @"^[0-9]{1,2}$")) {
-					pressList.Add (ModuleButtons [Math.Clamp (Math.Max (0, int.Parse (presses [i].ToString ()) - 1), 0, ModuleButtons.Length - 1)]);
+					pressList.Add (ModuleButtons [Math.Clamp (Math.Max (1, int.Parse (presses [i].ToString ())) - 1, 0, ModuleButtons.Length - 1)]);
 				}
 			}
 
