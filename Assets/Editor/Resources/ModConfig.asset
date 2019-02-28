@@ -15,6 +15,6 @@ MonoBehaviour:
   title: Sueet Wall
   description: "This module isn't as sweet as certain sweets\n\nmoduleID: SueetWall\n\nManual
     HTML: https://ktane.timwi.de/HTML/Sueet%20Wall.html\r\nManual PDF: https://ktane.timwi.de/PDF/Sueet%20Wall.pdf"
-  version: 1.2
+  version: 1.21
   outputFolder: Build
   previewImage: {fileID: 2800000, guid: 025ad63290f81a147ac1bf42f3fec546, type: 3}

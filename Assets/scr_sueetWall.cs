@@ -138,7 +138,7 @@ public class scr_sueetWall : MonoBehaviour {
             }
         } else {
             matColor.material.color = new Color32(128, 191, 255, 255);
-            Debug.LogFormat(@"[Sueet Wall #{0}] Button on #{1} was incorrect.", moduleId, GetCoord(buttonPressed));
+            Debug.LogFormat(@"[Sueet Wall #{0}] Button on {1} was incorrect.", moduleId, GetCoord(buttonPressed));
             BombModule.HandleStrike();
         }
     }
