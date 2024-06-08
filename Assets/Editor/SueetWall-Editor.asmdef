@@ -1,0 +1,10 @@
+{
+  "name": "SueetWall-Editor",
+  "references": [
+    "SueetWall"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": []
+}

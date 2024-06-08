@@ -24,13 +24,29 @@ public class scr_sueetWall : MonoBehaviour {
     static int moduleIdCounter = 1;
     int moduleId;
 
-    void Start() {
-        moduleId = moduleIdCounter++;
-        int[] chosenSuits = new int[20];
-        int[] chosenNums = new int[20];
-        int[] chosenColors = new int[20];
+    int[] chosenSuits = new int[20];
+    int[] chosenNums = new int[20];
+    int[] chosenColors = new int[20];
 
-        for (int i = 0; i < ModuleButtons.Length; i++) {
+    void Awake()
+	{
+        moduleId = moduleIdCounter++;
+        for (int i = 0; i < ModuleButtons.Length; i++)
+        {
+            int j = i;
+            ModuleButtons[i].OnInteract += delegate () {
+                OnButtonPress(j);
+
+                return false;
+            };
+        }
+        GetComponent<KMBombModule>().OnActivate += OnActivate;
+    }
+
+    void Start()
+	{
+        for (int i = 0; i < ModuleButtons.Length; i++)
+        {
             chosenSuits[i] = Random.Range(0, SuitTexs.Length);
             ModuleButtons[i].transform.GetChild(0).GetComponent<Renderer>().material.SetTexture("_MainTex", SuitTexs[chosenSuits[i]]);
             var suitText = ModuleButtons[i].transform.GetChild(1).GetComponent<TextMesh>();
@@ -38,14 +54,10 @@ public class scr_sueetWall : MonoBehaviour {
             suitText.text = chosenNums[i].ToString();
             chosenColors[i] = Random.Range(0, 2);
             suitText.color = new[] { Color.black, Color.red }[chosenColors[i]];
-            int j = i;
-            ModuleButtons[i].OnInteract += delegate() {
-                OnButtonPress(j);
-
-                return false;
-            };
         }
+    }
 
+    void OnActivate() {
         int[] sideDir = { -6, -5, -4, -1, 1, 4, 5, 6 };
         int[,] checkSides = {
             { 0, 2, 5, 7 },
