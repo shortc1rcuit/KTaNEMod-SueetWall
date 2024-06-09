@@ -16,7 +16,7 @@ public class scr_sueetWall : MonoBehaviour {
     public Texture2D[] SuitTexs;
 
     delegate bool checkCond(int x, int y);
-    bool[] correctButtons = new bool[20];
+    bool[] correctButtons = null;
     List<int> pressedButtons = new List<int>();
 
     bool moduleSolved;
@@ -58,6 +58,8 @@ public class scr_sueetWall : MonoBehaviour {
     }
 
     void OnActivate() {
+        correctButtons = new bool[20];
+
         int[] sideDir = { -6, -5, -4, -1, 1, 4, 5, 6 };
         int[,] checkSides = {
             { 0, 2, 5, 7 },
@@ -123,7 +125,7 @@ public class scr_sueetWall : MonoBehaviour {
         BombAudio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
         ModuleSelect.AddInteractionPunch();
 
-        if (moduleSolved || pressedButtons.Contains(buttonPressed)) {
+        if (correctButtons == null || moduleSolved || pressedButtons.Contains(buttonPressed)) {
             return;
         }
 
