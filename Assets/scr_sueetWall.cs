@@ -16,7 +16,7 @@ public class scr_sueetWall : MonoBehaviour {
     public Texture2D[] SuitTexs;
 
     delegate bool checkCond(int x, int y);
-    bool[] correctButtons = new bool[20];
+    bool[] correctButtons = null;
     List<int> pressedButtons = new List<int>();
 
     bool moduleSolved;
@@ -55,9 +55,28 @@ public class scr_sueetWall : MonoBehaviour {
             chosenColors[i] = Random.Range(0, 2);
             suitText.color = new[] { Color.black, Color.red }[chosenColors[i]];
         }
+
+        Debug.LogFormat(@"[Sueet Wall #{0}] Layout:", moduleId);
+
+        string[] colors = { "B", "R" };
+        string[] suits = { "♣", "♥", "♠", "♦" };
+
+        for (int i = 0; i < 5; i++)
+		{
+            string[] layoutLine = new string[4];
+
+			for (int j = 0; j < 4; j++)
+			{
+                layoutLine[j] = colors[chosenColors[i * 4 + j]] + "-" + chosenNums[i * 4 + j].ToString() + "-" + suits[chosenSuits[i * 4 + j]];
+			}
+
+            Debug.LogFormat(@"[Sueet Wall #{0}] {1}", moduleId, layoutLine.Join(" "));
+        }
     }
 
     void OnActivate() {
+        correctButtons = new bool[20];
+
         int[] sideDir = { -6, -5, -4, -1, 1, 4, 5, 6 };
         int[,] checkSides = {
             { 0, 2, 5, 7 },
@@ -81,14 +100,24 @@ public class scr_sueetWall : MonoBehaviour {
             }
 
             correctButtons[i] = (checkSuits == 4);
-
-            if (correctButtons[i]) {
-                Debug.LogFormat(@"[Sueet Wall #{0}] Button on {1} is correct.", moduleId, GetCoord(i));
-            }
         }
 
         if (correctButtons.Count(x => x == true) == 0) {
             Debug.LogFormat(@"[Sueet Wall #{0}] No buttons are correct, you can press any button.", moduleId);
+		}
+		else
+		{
+            List<string> solution = new List<string>();
+
+			for (int i = 0; i < correctButtons.Length; i++)
+			{
+				if (correctButtons[i])
+				{
+                    solution.Add(GetCoord(i));
+                }
+			}
+
+            Debug.LogFormat(@"[Sueet Wall #{0}] Solution: {1}.", moduleId, solution.Join(", "));
         }
     }
 
@@ -123,7 +152,7 @@ public class scr_sueetWall : MonoBehaviour {
         BombAudio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
         ModuleSelect.AddInteractionPunch();
 
-        if (moduleSolved || pressedButtons.Contains(buttonPressed)) {
+        if (correctButtons == null || moduleSolved || pressedButtons.Contains(buttonPressed)) {
             return;
         }
 
